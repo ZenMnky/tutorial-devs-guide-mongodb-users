@@ -20,7 +20,8 @@ describe('Updating records', () => {
         assert(users.length === 1);
         assert(users[0].name === 'Clifford');
         done();
-      });
+      })
+      .catch((error) => console.error('error: ', error.message));
   };
 
   it('model instance set and save', (done) => {
