@@ -31,4 +31,19 @@ describe('Updating records', () => {
   it('model instance can update with updateOne', (done) => {
     assertName(joe.updateOne({ name: 'Clifford' }), done);
   });
+
+  it('model class can update', (done) => {
+    assertName(User.updateMany({ name: 'Joe' }, { name: 'Clifford' }), done);
+  });
+
+  it('model class can update one record', (done) => {
+    assertName(
+      User.findOneAndUpdate({ name: 'Joe' }, { name: 'Clifford' }),
+      done
+    );
+  });
+
+  it('model class can find a record with an ID and update', (done) => {
+    assertName(User.findByIdAndUpdate(joe._id, { name: 'Clifford' }), done);
+  });
 });
