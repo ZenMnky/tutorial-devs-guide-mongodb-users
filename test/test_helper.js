@@ -5,6 +5,7 @@ before((done) => {
   mongoose.connect(process.env.TEST_DATABASE_CONNECTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
 
   const db = mongoose.connection;
