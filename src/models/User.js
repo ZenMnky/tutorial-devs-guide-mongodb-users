@@ -11,6 +11,7 @@ const UserSchema = mongoose.Schema({
     },
   },
   posts: [PostSchema],
+  likes: Number,
 });
 
 UserSchema.virtual('postCount').get(function () {

@@ -5,7 +5,7 @@ describe('Updating records', () => {
   let joe;
 
   beforeEach((done) => {
-    joe = new User({ name: 'Joe' });
+    joe = new User({ name: 'Joe', likes: 0 });
     joe.save().then(() => {
       done();
     });
@@ -48,13 +48,13 @@ describe('Updating records', () => {
     assertName(User.findByIdAndUpdate(joe._id, { name: 'Clifford' }), done);
   });
 
-  xit('increments User class post counts by one', (done) => {
-    User.updateMany({ name: 'Joe' }, { $inc: { postCount: 1 } })
+  it('increments User class likes by 10', (done) => {
+    User.updateMany({ name: 'Joe' }, { $inc: { likes: 10 } })
       .then(() => {
         return User.find({ name: 'Joe' });
       })
       .then((users) => {
-        assert(users[0].postCount === 1);
+        assert(users[0].likes === 10);
         done();
       });
   });
