@@ -5,6 +5,11 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  postCount: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model('User', UserSchema);
