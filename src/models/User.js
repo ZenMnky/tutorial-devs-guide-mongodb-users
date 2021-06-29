@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const PostSchema = require('./Post_Schema');
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -14,6 +15,7 @@ const UserSchema = mongoose.Schema({
     required: false,
     default: 0,
   },
+  posts: [PostSchema],
 });
 
 module.exports = mongoose.model('User', UserSchema);
