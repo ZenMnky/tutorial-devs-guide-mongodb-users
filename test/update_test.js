@@ -11,10 +11,8 @@ describe('Updating records', () => {
     });
   });
 
-  it('model instance set and save', (done) => {
-    joe.set('name', 'Clifford');
-    joe
-      .save()
+  const assertName = (operation, done) => {
+    operation
       .then(() => {
         return User.find({});
       })
@@ -23,5 +21,14 @@ describe('Updating records', () => {
         assert(users[0].name === 'Clifford');
         done();
       });
+  };
+
+  it('model instance set and save', (done) => {
+    joe.set('name', 'Clifford');
+    assertName(joe.save(), done);
+  });
+
+  it('model instance can update with updateOne', (done) => {
+    assertName(joe.updateOne({ name: 'Clifford' }), done);
   });
 });
