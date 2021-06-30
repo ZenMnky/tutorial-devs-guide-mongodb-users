@@ -29,4 +29,25 @@ describe('Associations', () => {
         done();
       });
   });
+
+  it('saves a full association graph', (done) => {
+    User.findOne({ name: 'Joe' })
+      .populate({
+        path: 'blogPosts',
+        populate: {
+          path: 'comments',
+          model: 'Comment',
+          populate: {
+            path: 'user',
+            model: 'User',
+          },
+        },
+      })
+      .then((user) => {
+        assert(user.name === 'Joe');
+        assert(user.blogPosts[0].title === 'Key Insights');
+        assert(user.blogPosts[0].comments[0].content === 'Sweet post!');
+        done();
+      });
+  });
 });
