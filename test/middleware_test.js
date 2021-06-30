@@ -22,7 +22,6 @@ describe('Middleware', () => {
       .remove()
       .then(() => BlogPost.countDocuments({}))
       .then((count) => {
-        // console.log('count: ', count);
         assert(count === 0);
         done();
       });
