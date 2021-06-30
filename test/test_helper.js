@@ -18,9 +18,27 @@ before((done) => {
 });
 
 cleanUp = (done) => {
-  mongoose.connection.collections.users.drop(() => {
-    // ready to run the next test
-    done();
+  const { users, comments, blogposts } = mongoose.connection.collections;
+
+  /**
+   * can not drop multiple collections at once
+   * use callback hell
+   * or make a loop
+   */
+
+  // users.drop(() => {
+  //   comments.drop(() => {
+  //     blogposts.drop(() => {
+  //       done();
+  //     });
+  //   });
+  // });
+
+  [users, comments, blogposts].forEach((collection, index, thisArray) => {
+    collection.drop();
+    if (index === thisArray.length - 1) {
+      done();
+    }
   });
 };
 
