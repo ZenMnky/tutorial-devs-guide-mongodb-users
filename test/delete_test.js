@@ -13,7 +13,7 @@ describe('Deleting a user', () => {
 
   it('model instance remove', (done) => {
     joe
-      .remove()
+      .deleteOne()
       .then(() => User.findOne({ name: 'Joe' }))
       .then((user) => {
         assert(!user);
